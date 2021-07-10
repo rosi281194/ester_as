@@ -20,7 +20,7 @@ class User extends Model implements AuthenticatableContract
 
     public function getNameAttribute()
     {
-        return $this->nombre . ' ' . $this->apellido;
+        return $this->username;
     }
 
     public function setPasswordAttribute($password)
@@ -38,41 +38,15 @@ class User extends Model implements AuthenticatableContract
     public static function getRole($int = null)
     {
         $roles = array(
-            '0' => 'sadmin',
-            '1' => 'admin',
-            '2' => 'venta',
-            '3' => 'operario',
-            '4' => 'diseño',
-            '5' => 'auxVenta'
+            '0' => 'admin',
+            '1' => 'user',
         );
         if (empty($int)) {
             return array(
-                ['value' => '0', 'text' => 'sadmin'],
-                ['value' => '1', 'text' => 'admin'],
-                ['value' => '2', 'text' => 'venta'],
-                ['value' => '3', 'text' => 'operario'],
-                ['value' => '4', 'text' => 'diseño'],
-                ['value' => '5', 'text' => 'auxVenta'],
+                ['value' => '0', 'text' => 'admin'],
+                ['value' => '1', 'text' => 'user'],
             );
         }
         return $roles[$int];
-    }
-
-    public static function sendNotify($message, $title, $orden = 0)
-    {
-        $fcmTokens = DB::table(self::$tables)
-            ->where('id', '!=', Auth::id())
-            ->pluck('tokenpush')->toArray();
-        $data = Larafirebase::fromRaw([
-            'registration_ids' => $fcmTokens,
-            'data' => [
-                'newOrden' => true,
-                'orden' => $orden
-            ],
-            'notification' => [
-                'title' => $title,
-                'body' => $message
-            ],
-        ])->send();
     }
 }
