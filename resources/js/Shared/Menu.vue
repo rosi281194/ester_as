@@ -6,19 +6,19 @@
 
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
-                        <template v-for="(link, key) in menue">
-                            <template v-if="getPermission(link.role)">
-                                <li :class="'nav-item '+((getUrl() === link.url)?'active':'')">
-                                    <inertia-link
-                                        :href="link.url"
-                                        :key="key"
-                                        class="nav-link"
-                                    >
-                                        <span>{{ link.label }}</span>
-                                    </inertia-link>
-                                </li>
-                            </template>
+                    <template v-for="(link, key) in menue">
+                        <template v-if="getPermission(link.role)">
+                            <li :class="'nav-item '+((getUrl() === link.url)?'active':'')">
+                                <inertia-link
+                                    :href="link.url"
+                                    :key="key"
+                                    class="nav-link"
+                                >
+                                    <span>{{ link.label }}</span>
+                                </inertia-link>
+                            </li>
                         </template>
+                    </template>
                 </b-navbar-nav>
 
                 <!-- Right aligned nav items -->
@@ -43,15 +43,19 @@ export default {
                     label: 'Asistencia',
                     url: '/',
                     role: 'user',
-                },{
+                }, {
                     label: 'Personas',
-                    url: '/',
+                    url: '/persona',
                     role: 'user',
-                },{
+                }, {
+                    label: 'Escuadron',
+                    url: '/escuadron',
+                    role: 'user',
+                }, {
                     label: 'Usuarios',
                     url: '/users',
                     role: 'admin',
-                },{
+                }, {
                     label: 'Reporte',
                     url: '/',
                     role: 'user',
@@ -72,7 +76,7 @@ export default {
             }
             return value;
         },
-        getUrl(){
+        getUrl() {
             return window.location.pathname;
         }
     }

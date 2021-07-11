@@ -24,8 +24,9 @@
                         show-empty
                         small
                     >
-
-
+                        <template #empty="scope">
+                            <p class="text-center">{{ textoVacio }}</p>
+                        </template>
                         <template v-slot:cell(role)="data">
                             {{ getRoles(data.value) }}
                         </template>

@@ -1,16 +1,9 @@
 <?php
 
-use App\Http\Controllers\CajaController;
-use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EscuadronController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OrdenesController;
-use App\Http\Controllers\PDFController;
-use App\Http\Controllers\ProductosController;
-use App\Http\Controllers\ReciboController;
-use App\Http\Controllers\ReporteController;
-use App\Http\Controllers\StockController;
-use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,5 +42,20 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('guardarUsuarios');
     Route::delete('user/{id}', [UserController::class, 'borrar'])
         ->name('eliminarUsuarios');
+    //personas
+    Route::get('persona', [PersonaController::class, 'getAll'])
+        ->name('listaPersonas');
+    Route::post('persona', [PersonaController::class, 'post'])
+        ->name('guardarPersona');
+    Route::delete('persona/{id}', [PersonaController::class, 'borrar'])
+        ->name('eliminarPersona');
+    //escuadron
+    Route::get('escuadron', [EscuadronController::class, 'getAll'])
+        ->name('listaEscuadrones');
+    Route::post('escuadron', [EscuadronController::class, 'post'])
+        ->name('guardarEscuadrones');
+    Route::delete('escuadron/{id}', [EscuadronController::class, 'borrar'])
+        ->name('eliminarEscuadrones');
+    //reporte
 });
 

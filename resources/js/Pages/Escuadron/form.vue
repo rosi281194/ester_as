@@ -57,7 +57,6 @@ export default {
         isNew: Boolean,
         id: String,
         itemRow: Object,
-        roles: Array
     },
     components: {
         LoadingButton

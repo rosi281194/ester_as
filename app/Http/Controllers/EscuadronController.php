@@ -14,7 +14,7 @@ class EscuadronController extends Controller
     public function getAll()
     {
         $data = Escuadron::getAll();
-        return Inertia::render('Persona/tabla', ['escuadron' => $data]);
+        return Inertia::render('Escuadron/tabla', ['escuadron' => $data]);
     }
 
     public function post(Request $request)
