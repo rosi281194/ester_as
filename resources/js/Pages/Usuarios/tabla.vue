@@ -9,8 +9,7 @@
             <div class="row m-b-20 m-t-10">
                 <div class="col">
                     <b-button v-b-modal="'userModal'" @click="loadModal()" variant="primary">{{ boton1 }}</b-button>
-                    <FormUser :isNew="isNew" id="userModal" :itemRow="itemRow" :sucursales="sucursales"
-                              :roles="roles"></FormUser>
+                    <FormUser :isNew="isNew" id="userModal" :itemRow="itemRow" :roles="roles"></FormUser>
                 </div>
             </div>
 
@@ -96,9 +95,6 @@ export default {
             this.$inertia.delete(`user/${id}`, {
                 onBefore: () => confirm('Esta seguro?'),
             })
-        },
-        getSucursal(id) {
-            return this.sucursales[id];
         },
         getRoles(id) {
             let rol = '';

@@ -29,7 +29,7 @@
                         <b-form-select
                             v-if="item.type==='select'"
                             v-model="item.value"
-                            :options="(key==='sucursal')?sucursales:roles"
+                            :options="roles"
                         >
                             <template #first>
                                 <b-form-select-option :value="null">Seleccione una opcion</b-form-select-option>

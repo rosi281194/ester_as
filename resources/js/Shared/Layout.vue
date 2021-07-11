@@ -10,7 +10,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="copyright float-right">
-                        ©2021, por <a href="#">Ross</a>
+                        ©2021, por <a href="#">Rouse</a>
                     </div>
                 </div>
             </footer>

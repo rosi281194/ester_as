@@ -6,9 +6,9 @@
 
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
-                        <template v-for="(link, key) in menu">
+                        <template v-for="(link, key) in menue">
                             <template v-if="getPermission(link.role)">
-                                <li :class="'nav-item '+(($page.url === link.url ||$page.url === link.url2)?'active':'')">
+                                <li :class="'nav-item '+((getUrl() === link.url)?'active':'')">
                                     <inertia-link
                                         :href="link.url"
                                         :key="key"
@@ -38,7 +38,7 @@
 export default {
     data() {
         return {
-            menu: [
+            menue: [
                 {
                     label: 'Asistencia',
                     url: '/',
@@ -62,15 +62,18 @@ export default {
     methods: {
         getPermission(role) {
             let value = false;
-            for (const key in this.$page.props.roles) {
-                if (key == role) {
-                    if (this.$page.props.roles[key].includes(this.$page.props.user.role)) {
+            for (const key in this.$page.props.rolesP) {
+                if (key === role) {
+                    if (this.$page.props.rolesP[key].includes(this.$page.props.user.role)) {
                         value = true;
                         break;
                     }
                 }
             }
             return value;
+        },
+        getUrl(){
+            return window.location.pathname;
         }
     }
 };
