@@ -42,11 +42,11 @@ export default {
                 {
                     label: 'Asistencia',
                     url: '/',
-                    role: 'admin',
+                    role: 'user',
                 },{
                     label: 'Personas',
                     url: '/',
-                    role: 'admin',
+                    role: 'user',
                 },{
                     label: 'Usuarios',
                     url: '/users',
@@ -54,7 +54,7 @@ export default {
                 },{
                     label: 'Reporte',
                     url: '/',
-                    role: 'admin',
+                    role: 'user',
                 },
             ],
         };
