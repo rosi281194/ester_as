@@ -62,12 +62,10 @@ import axios from "axios";
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-    name: "Producto",
     props: {
         isNew: Boolean,
         id: String,
         itemRow: Object,
-        sucursales: Object,
         roles: Array
     },
     components: {
@@ -93,50 +91,14 @@ export default {
                     type: "password",
                     state: null,
                     stateText: null
-                }, apellido: {
-                    label: 'Apellido',
-                    value: "",
-                    type: "text",
-                    state: null,
-                    stateText: null
-                }, nombre: {
-                    label: 'Nombre',
-                    value: "",
-                    type: "text",
-                    state: null,
-                    stateText: null
-                }, ci: {
-                    label: 'CI',
-                    value: "",
-                    type: "text",
-                    state: null,
-                    stateText: null
-                }, telefono: {
-                    label: 'Telefono',
-                    value: "",
-                    type: "text",
-                    state: null,
-                    stateText: null
-                }, email: {
-                    label: 'Correo',
-                    value: "",
-                    type: "text",
-                    state: null,
-                    stateText: null
-                }, sucursal: {
-                    label: 'sucursal',
-                    value: "",
-                    type: "select",
-                    state: null,
-                    stateText: null
                 }, role: {
                     label: 'Rol',
                     value: "",
                     type: "select",
                     state: null,
                     stateText: null
-                }, enable: {
-                    label: 'Habilitado',
+                }, activo: {
+                    label: 'Activo?',
                     value: "",
                     type: "bool",
                     state: null,
@@ -162,10 +124,13 @@ export default {
             } else {
                 if ('id' in this.itemRow) {
                     this.idForm = this.itemRow['id'];
-                    this.titulo2=this.titulo2 +' '+this.itemRow['correlativo']
                 }
                 Object.keys(this.form).forEach(key => {
-                    this.form[key].value = this.itemRow[key];
+                    if (['activo'].includes(key)) {
+                        this.form[key].value = (this.itemRow[key]==1);
+                    } else {
+                        this.form[key].value = this.itemRow[key];
+                    }
                 })
             }
         },
@@ -175,7 +140,6 @@ export default {
                 this.form[key].stateText = null;
             })
             this.errors = [];
-            this.titulo2= "Modificar Orden";
         },
         handleOk(bvModalEvt) {
             // Prevent modal from closing
@@ -191,22 +155,14 @@ export default {
             }
             Object.keys(this.form).forEach(key => {
                 if (this.form[key].value != null) {
-                    if (['enable'].includes(key)) {
+                    if (['activo'].includes(key)) {
                         user.append(key, this.form[key].value ? '1' : '0');
                     } else {
                         user.append(key, this.form[key].value);
                     }
                 }
             })
-            /* this.$inertia.post('/admin/producto',producto, {
-                 onSuccess: (page) => {
-                     console.log(page);
-                 },
-                 onError: (errors) => {
-                     console.log(errors);
-                 }
-             });*/
-            axios.post('/admin/user', user, {headers: {'Content-Type': 'multipart/form-data'}})
+            axios.post('/user', user, {headers: {'Content-Type': 'multipart/form-data'}})
                 .then(({data}) => {
                     if (data["status"] === 0) {
                         this.$bvModal.hide(this.id)

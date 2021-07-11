@@ -49,7 +49,7 @@ export default {
                     role: 'admin',
                 },{
                     label: 'Usuarios',
-                    url: '/',
+                    url: '/users',
                     role: 'admin',
                 },{
                     label: 'Reporte',

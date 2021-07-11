@@ -4067,7 +4067,7 @@ tbody.collapse.show {
 .custom-control-label::before {
   position: absolute;
   top: 0.25rem;
-  left: 0;
+  left: -23px;
   display: block;
   width: 1rem;
   height: 1rem;
@@ -15568,7 +15568,6 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .main-panel>.content {
-  margin-top: 70px;
   padding: 30px 15px;
   min-height: calc(100vh - 123px);
 }
