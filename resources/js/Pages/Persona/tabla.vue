@@ -30,8 +30,8 @@
                         <template v-slot:cell(escuadron)="data">
                             {{ getEscuadron(data.value) }}
                         </template>
-                        <template v-slot:cell(activo)="data">
-                            {{ (data.value === 1) ? "Si" : "No" }}
+                        <template v-slot:cell(fechaNacimiento)="data">
+                            {{ data.value | moment("DD/MM/YYYY") }}
                         </template>
                         <template v-slot:cell(Acciones)="row">
                             <div class="row-actions">
@@ -53,12 +53,13 @@
 <script>
 import Layout from '@/Shared/Layout'
 import Form from './form'
+import moment from 'moment';
 
 export default {
     layout: Layout,
     props: {
         personas: Array,
-        escuadron: Array,
+        escuadron: Object,
         errors: Object,
     },
     components: {
@@ -72,7 +73,6 @@ export default {
             boton3: "Borrar",
             titulo: 'Personas',
             textoVacio: 'No existen Personas',
-            idModal: 'userModal',
             fields:
                 [
                     'nombre',
@@ -98,15 +98,15 @@ export default {
             })
         },
         getEscuadron(id) {
-            let rol = '';
+            let data = '';
             Object.keys(this.escuadron).forEach(
                 key => {
                     if (this.escuadron[key].value == id) {
-                        rol = this.escuadron[key].text;
+                        data = this.escuadron[key].text;
                     }
                 }
             )
-            return rol;
+            return data;
         },
     }
 }

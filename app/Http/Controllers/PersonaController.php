@@ -15,6 +15,7 @@ class PersonaController extends Controller
     {
         $data = Persona::getAll();
         $escuadron = Escuadron::getAll();
+        $escuadron = $escuadron->pluck('nombre', 'id');
         return Inertia::render('Persona/tabla', ['personas' => $data,'escuadron'=>$escuadron]);
     }
 

@@ -66,8 +66,7 @@ export default {
         isNew: Boolean,
         id: String,
         itemRow: Object,
-        roles: Array,
-        escuadron: Array
+        escuadron: Object
     },
     components: {
         LoadingButton
@@ -96,12 +95,6 @@ export default {
                     label: 'ci',
                     value: "",
                     type: "text",
-                    state: null,
-                    stateText: null
-                }, role: {
-                    label: 'Rol',
-                    value: "",
-                    type: "select",
                     state: null,
                     stateText: null
                 }, fechaNacimiento: {
