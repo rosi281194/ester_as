@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Persona extends Model
+class Asistencia extends Model
 {
-    protected $table = 'persona';
-    public static $tables = 'persona';
+    protected $table = 'asistencia';
+    public static $tables = 'asistencia';
     protected $guarded = [];
 
     public static function getAll()
     {
         $personas = DB::table(self::$tables);
-        $personas = $personas->whereNull('deleted_at');
         return $personas->get();
     }
 }

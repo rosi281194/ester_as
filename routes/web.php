@@ -30,11 +30,14 @@ Route::post('logout', [LoginController::class, 'logout'])
     ->name('logout');
 
 
-Route::get('/', [DashboardController::class, 'index'])
-    ->name('dashboard')
-    ->middleware('auth');
+
 
 Route::group(['middleware' => 'auth'], function () {
+    //asistencia
+    Route::get('/', [DashboardController::class, 'index'])
+        ->name('dashboard');
+    Route::post('/', [DashboardController::class, 'post'])
+        ->name('dashboardSave');
     //users
     Route::get('users', [UserController::class, 'getAll'])
         ->name('listaUsuarios');
