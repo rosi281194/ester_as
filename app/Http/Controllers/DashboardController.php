@@ -20,13 +20,12 @@ class DashboardController extends Controller
         $nowI = Carbon::now()->startOfDay()->toDateTimeString();
         $nowF = Carbon::now()->endOfDay()->toDateTimeString();
         $presentes = DB::table(Asistencia::$tables)
-            ->whereBetween('asistencia.created_at', [$nowI, $nowF])
+            ->whereBetween('created_at', [$nowI, $nowF])
             ->select('persona')
             ->get()
             ->pluck('persona');
         $personas = DB::table(Persona::$tables)
             ->whereNotIn('id', $presentes)
-            ->select(Persona::$tables . '.*')
             ->get();
         $escuadrones = Escuadron::getAll();
         return Inertia::render('Index', ['personas' => $personas, 'escuadrones' => $escuadrones]);

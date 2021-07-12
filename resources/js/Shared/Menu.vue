@@ -57,7 +57,7 @@ export default {
                     role: 'admin',
                 }, {
                     label: 'Reporte',
-                    url: '/',
+                    url: '/reporte',
                     role: 'user',
                 },
             ],

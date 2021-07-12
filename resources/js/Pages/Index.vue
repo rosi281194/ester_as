@@ -97,11 +97,6 @@ export default {
         loadModal(item = null) {
             this.itemRow = item.item;
         },
-        borrar(id) {
-            this.$inertia.delete(`persona/${id}`, {
-                onBefore: () => confirm('Esta seguro?'),
-            })
-        },
         getEscuadron(id) {
             let data = '';
             for (const key in this.escuadrones) {
