@@ -29,7 +29,7 @@
                         <b-form-select
                             v-if="item.type==='select'"
                             v-model="item.value"
-                            :options="roles"
+                            :options="escuadron"
                         >
                             <template #first>
                                 <b-form-select-option :value="null">Seleccione una opcion</b-form-select-option>
@@ -66,7 +66,7 @@ export default {
         isNew: Boolean,
         id: String,
         itemRow: Object,
-        roles: Array
+        escuadron: Object
     },
     components: {
         LoadingButton
@@ -76,31 +76,37 @@ export default {
             sending: false,
             boton1: "Nuevo",
             boton2: "Modificar",
-            titulo1: "Nuevo Usuario",
-            titulo2: "Modificar Usuario",
+            titulo1: "Nuevo Persona",
+            titulo2: "Modificar Persona",
             form: {
-                username: {
-                    label: 'Usuario',
+                nombre: {
+                    label: 'nombre',
                     value: "",
                     type: "text",
                     state: null,
                     stateText: null
-                }, password: {
-                    label: 'Contraseña',
+                }, apellido: {
+                    label: 'apellido',
                     value: "",
-                    type: "password",
+                    type: "text",
                     state: null,
                     stateText: null
-                }, role: {
-                    label: 'Rol',
+                }, ci: {
+                    label: 'ci',
+                    value: "",
+                    type: "text",
+                    state: null,
+                    stateText: null
+                }, fechaNacimiento: {
+                    label: 'Fecha de Nacimiento',
+                    value: "",
+                    type: "date",
+                    state: null,
+                    stateText: null
+                }, escuadron: {
+                    label: 'Escuadron',
                     value: "",
                     type: "select",
-                    state: null,
-                    stateText: null
-                }, activo: {
-                    label: 'Activo?',
-                    value: "",
-                    type: "bool",
                     state: null,
                     stateText: null
                 }
@@ -155,14 +161,10 @@ export default {
             }
             Object.keys(this.form).forEach(key => {
                 if (this.form[key].value != null) {
-                    if (['activo'].includes(key)) {
-                        user.append(key, this.form[key].value ? '1' : '0');
-                    } else {
-                        user.append(key, this.form[key].value);
-                    }
+                    user.append(key, this.form[key].value);
                 }
             })
-            axios.post('/user', user, {headers: {'Content-Type': 'multipart/form-data'}})
+            axios.post('/persona', user, {headers: {'Content-Type': 'multipart/form-data'}})
                 .then(({data}) => {
                     if (data["status"] === 0) {
                         this.$bvModal.hide(this.id)

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sucursal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +24,7 @@ class UserController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'username' => 'required|min:5',
-                'activado' => 'required',
+                'activo' => 'required',
                 'role' => 'required',
             ]);
             if ($validator->fails()) {
@@ -57,31 +56,5 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return back()->withInput();
-    }
-
-    public function savePush(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'token' => 'required',
-            ]);
-            if ($validator->fails()) {
-                return response()->json([
-                    'status' => -1,
-                    'errors' => $validator->errors()
-                ]);
-            }
-            $user = User::find(Auth::id());
-            $user->tokenpush = $request['token'];
-            $user->save();
-            return response()->json([
-                'status' => 0,
-                'errors' => []
-            ]);
-        } catch (\Exception $error) {
-            Log::error($error->getMessage());
-            return response()->json(["status" => -1,
-                'error' => $error,], 500);
-        }
     }
 }

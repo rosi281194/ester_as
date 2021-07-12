@@ -8,8 +8,8 @@
             </div>
             <div class="row m-b-20 m-t-10">
                 <div class="col">
-                    <b-button v-b-modal="'userModal'" @click="loadModal()" variant="primary">{{ boton1 }}</b-button>
-                    <FormUser :isNew="isNew" id="userModal" :itemRow="itemRow" :roles="roles"></FormUser>
+                    <b-button v-b-modal="'escuadronModal'" @click="loadModal()" variant="primary">{{ boton1 }}</b-button>
+                    <FormUser :isNew="isNew" id="escuadronModal" :itemRow="itemRow"></FormUser>
                 </div>
             </div>
 
@@ -19,7 +19,7 @@
                         striped
                         hover
                         responsive
-                        :items="userss"
+                        :items="escuadron"
                         :fields="fields"
                         show-empty
                         small
@@ -27,15 +27,9 @@
                         <template #empty="scope">
                             <p class="text-center">{{ textoVacio }}</p>
                         </template>
-                        <template v-slot:cell(role)="data">
-                            {{ getRoles(data.value) }}
-                        </template>
-                        <template v-slot:cell(activo)="data">
-                            {{ (data.value === 1) ? "Si" : "No" }}
-                        </template>
                         <template v-slot:cell(Acciones)="row">
                             <div class="row-actions">
-                                <b-button v-b-modal="'userModal'" variant="default" @click="loadModal(false,row)">
+                                <b-button v-b-modal="'escuadronModal'" variant="default" @click="loadModal(false,row)">
                                     {{ boton2 }}
                                 </b-button>
                                 <b-button class="btn-danger" @click="borrar(row.item.id)">
@@ -57,8 +51,7 @@ import FormUser from './form'
 export default {
     layout: Layout,
     props: {
-        userss: Array,
-        roles: Array,
+        escuadron: Array,
         errors: Object,
     },
     components: {
@@ -70,15 +63,12 @@ export default {
             boton1: "Nuevo",
             boton2: "Modificar",
             boton3: "Borrar",
-            titulo: 'Usuarios',
-            textoVacio: 'No existen Usuarios',
+            titulo: 'Escuadrones',
+            textoVacio: 'No existen Escuadrones',
             idModal: 'userModal',
             fields:
                 [
-                    'username',
-                    'activo',
-                    'role',
-                    'ultimoAcceso',
+                    'nombre',
                     'Acciones'
                 ],
             itemRow: {}
@@ -93,21 +83,10 @@ export default {
             }
         },
         borrar(id) {
-            this.$inertia.delete(`user/${id}`, {
+            this.$inertia.delete(`escuadron/${id}`, {
                 onBefore: () => confirm('Esta seguro?'),
             })
-        },
-        getRoles(id) {
-            let rol = '';
-            Object.keys(this.roles).forEach(
-                key => {
-                    if (this.roles[key].value == id) {
-                        rol = this.roles[key].text;
-                    }
-                }
-            )
-            return rol;
-        },
+        }
     }
 }
 </script>

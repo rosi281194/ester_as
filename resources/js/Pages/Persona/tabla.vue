@@ -8,8 +8,8 @@
             </div>
             <div class="row m-b-20 m-t-10">
                 <div class="col">
-                    <b-button v-b-modal="'userModal'" @click="loadModal()" variant="primary">{{ boton1 }}</b-button>
-                    <FormUser :isNew="isNew" id="userModal" :itemRow="itemRow" :roles="roles"></FormUser>
+                    <b-button v-b-modal="'personaModal'" @click="loadModal()" variant="primary">{{ boton1 }}</b-button>
+                    <Form :isNew="isNew" id="personaModal" :itemRow="itemRow" :escuadron="escuadron"></Form>
                 </div>
             </div>
 
@@ -19,7 +19,7 @@
                         striped
                         hover
                         responsive
-                        :items="userss"
+                        :items="personas"
                         :fields="fields"
                         show-empty
                         small
@@ -27,15 +27,15 @@
                         <template #empty="scope">
                             <p class="text-center">{{ textoVacio }}</p>
                         </template>
-                        <template v-slot:cell(role)="data">
-                            {{ getRoles(data.value) }}
+                        <template v-slot:cell(escuadron)="data">
+                            {{ getEscuadron(data.value) }}
                         </template>
-                        <template v-slot:cell(activo)="data">
-                            {{ (data.value === 1) ? "Si" : "No" }}
+                        <template v-slot:cell(fechaNacimiento)="data">
+                            {{ data.value | moment("DD/MM/YYYY") }}
                         </template>
                         <template v-slot:cell(Acciones)="row">
                             <div class="row-actions">
-                                <b-button v-b-modal="'userModal'" variant="default" @click="loadModal(false,row)">
+                                <b-button v-b-modal="'personaModal'" variant="default" @click="loadModal(false,row)">
                                     {{ boton2 }}
                                 </b-button>
                                 <b-button class="btn-danger" @click="borrar(row.item.id)">
@@ -52,17 +52,18 @@
 
 <script>
 import Layout from '@/Shared/Layout'
-import FormUser from './form'
+import Form from './form'
+import moment from 'moment';
 
 export default {
     layout: Layout,
     props: {
-        userss: Array,
-        roles: Array,
+        personas: Array,
+        escuadron: Object,
         errors: Object,
     },
     components: {
-        FormUser,
+        Form,
     },
     data() {
         return {
@@ -70,15 +71,14 @@ export default {
             boton1: "Nuevo",
             boton2: "Modificar",
             boton3: "Borrar",
-            titulo: 'Usuarios',
-            textoVacio: 'No existen Usuarios',
-            idModal: 'userModal',
+            titulo: 'Personas',
+            textoVacio: 'No existen Personas',
             fields:
                 [
-                    'username',
-                    'activo',
-                    'role',
-                    'ultimoAcceso',
+                    'nombre',
+                    'apellido',
+                    'ci',
+                    'fechaNacimiento',
                     'Acciones'
                 ],
             itemRow: {}
@@ -93,20 +93,20 @@ export default {
             }
         },
         borrar(id) {
-            this.$inertia.delete(`user/${id}`, {
+            this.$inertia.delete(`persona/${id}`, {
                 onBefore: () => confirm('Esta seguro?'),
             })
         },
-        getRoles(id) {
-            let rol = '';
-            Object.keys(this.roles).forEach(
+        getEscuadron(id) {
+            let data = '';
+            Object.keys(this.escuadron).forEach(
                 key => {
-                    if (this.roles[key].value == id) {
-                        rol = this.roles[key].text;
+                    if (this.escuadron[key].value == id) {
+                        data = this.escuadron[key].text;
                     }
                 }
             )
-            return rol;
+            return data;
         },
     }
 }

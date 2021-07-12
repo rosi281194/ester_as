@@ -26,15 +26,6 @@
                             :state="item.state"
                             v-if="['text','password','date','email'].includes(item.type)"
                         ></b-input>
-                        <b-form-select
-                            v-if="item.type==='select'"
-                            v-model="item.value"
-                            :options="roles"
-                        >
-                            <template #first>
-                                <b-form-select-option :value="null">Seleccione una opcion</b-form-select-option>
-                            </template>
-                        </b-form-select>
                     </b-form-group>
                     <b-checkbox
                         v-if="item.type==='bool'"
@@ -66,7 +57,6 @@ export default {
         isNew: Boolean,
         id: String,
         itemRow: Object,
-        roles: Array
     },
     components: {
         LoadingButton
@@ -76,34 +66,16 @@ export default {
             sending: false,
             boton1: "Nuevo",
             boton2: "Modificar",
-            titulo1: "Nuevo Usuario",
-            titulo2: "Modificar Usuario",
+            titulo1: "Nuevo Escuadron",
+            titulo2: "Modificar Escuadron",
             form: {
-                username: {
-                    label: 'Usuario',
+                nombre: {
+                    label: 'Nombre',
                     value: "",
                     type: "text",
                     state: null,
                     stateText: null
-                }, password: {
-                    label: 'Contraseña',
-                    value: "",
-                    type: "password",
-                    state: null,
-                    stateText: null
-                }, role: {
-                    label: 'Rol',
-                    value: "",
-                    type: "select",
-                    state: null,
-                    stateText: null
-                }, activo: {
-                    label: 'Activo?',
-                    value: "",
-                    type: "bool",
-                    state: null,
-                    stateText: null
-                }
+                },
 
             },
             idForm: null,
@@ -126,11 +98,7 @@ export default {
                     this.idForm = this.itemRow['id'];
                 }
                 Object.keys(this.form).forEach(key => {
-                    if (['activo'].includes(key)) {
-                        this.form[key].value = (this.itemRow[key] == 1);
-                    } else {
-                        this.form[key].value = this.itemRow[key];
-                    }
+                    this.form[key].value = this.itemRow[key];
                 })
             }
         },
@@ -155,14 +123,10 @@ export default {
             }
             Object.keys(this.form).forEach(key => {
                 if (this.form[key].value != null) {
-                    if (['activo'].includes(key)) {
-                        user.append(key, this.form[key].value ? '1' : '0');
-                    } else {
-                        user.append(key, this.form[key].value);
-                    }
+                    user.append(key, this.form[key].value);
                 }
             })
-            axios.post('/user', user, {headers: {'Content-Type': 'multipart/form-data'}})
+            axios.post('/escuadron', user, {headers: {'Content-Type': 'multipart/form-data'}})
                 .then(({data}) => {
                     if (data["status"] === 0) {
                         this.$bvModal.hide(this.id)
