@@ -26,13 +26,37 @@
             </b-modal>
 
             <div class="row m-b-20">
-                <div class="col">
+                <b-col  class="my-1">
+                    <b-form-group
+                        label=""
+                        label-for="filter-input"
+                        label-align-sm="right"
+                        label-size="sm"
+                        class="mb-0"
+                    >
+                        <b-input-group size="sm">
+                            <b-form-input
+                                id="filter-input"
+                                v-model="filter"
+                                type="search"
+                                placeholder="Buscar Nombre"
+                            ></b-form-input>
+
+                                <b-button :disabled="!filter" @click="filter = ''" variant="primary">Limpiar</b-button>
+                        </b-input-group>
+                    </b-form-group>
+                </b-col>
+
+
+                <div class="col-12">
                     <b-table
                         striped
                         hover
                         responsive
                         :items="personas"
                         :fields="fields"
+                        :filter="filter"
+                        :filter-included-fields="filterOn"
                         show-empty
                         small
                     >
@@ -90,7 +114,9 @@ export default {
                     'Acciones'
                 ],
             itemRow: {},
-            errores:{}
+            errores:{},
+            filter: null,
+            filterOn: [],
         }
     },
     methods: {

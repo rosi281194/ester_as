@@ -2431,7 +2431,7 @@ select.form-control:focus::-ms-value {
 .input-group-sm>.input-group-append>.input-group-text,
 .input-group-sm>.input-group-prepend>.btn,
 .input-group-sm>.input-group-append>.btn {
-  padding: 0.25rem 0;
+
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;

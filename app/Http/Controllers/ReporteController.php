@@ -21,6 +21,14 @@ class ReporteController extends Controller
             ->get();
         $personas = DB::table(Persona::$tables)
             ->get();
+
+        $cantidadesc = DB::table('persona')
+            ->join('asistencia', 'persona.id', '=', 'asistencia.persona')
+            ->join('escuadron', 'escuadron.id', '=', 'persona.escuadron')
+            ->select('escuadron.nombre as escuadronNombre', DB::raw('count(escuadron.nombre) as total'))
+            ->groupBy('escuadron.nombre')
+            ->get();
+
         foreach ($personas as $key => $persona) {
             foreach ($presentes as $presente) {
                 if ($persona->id === $presente->persona) {
@@ -29,7 +37,7 @@ class ReporteController extends Controller
             }
         }
         $escuadrones = Escuadron::getAll();
-        return Inertia::render('Reporte', ['personas' => $personas, 'escuadrones' => $escuadrones]);
+        return Inertia::render('Reporte', ['personas' => $personas, 'escuadrones' => $escuadrones,'cantidad' => $cantidadesc]);
     }
 
 }

@@ -17,11 +17,18 @@ class CreatePersonaTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('ci')->unique();
+            $table->string('ci')->unique()->nullable();
+            $table->String('telefono')->nullable();
+            $table->String('correo')->nullable();
+            $table->boolean('estado');
             $table->dateTime('fechaNacimiento');
+            $table->boolean('bautizada');
+            $table->String('comentarios')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->String('escuadra')->nullable();
             $table->foreignId("escuadron")->constrained('escuadron');
+
         });
     }
 

@@ -24,10 +24,15 @@ class PersonaController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'nombre' => 'required',
+                'estado' => 'required',
+                'bautizada' => 'required',
                 'apellido' => 'required',
-                'ci' => 'required',
                 'fechaNacimiento' => 'required',
                 'escuadron' => 'required',
+                'telefono' => 'required|numeric',
+                'ci' => 'required|numeric',
+                'correo' => 'email|nullable'
+
             ]);
             if ($validator->fails()) {
                 return response()->json([

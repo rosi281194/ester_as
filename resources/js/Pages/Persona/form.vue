@@ -29,7 +29,7 @@
                         <b-form-select
                             v-if="item.type==='select'"
                             v-model="item.value"
-                            :options="escuadron"
+                            :options="obtenercombox(key)"
                         >
                             <template #first>
                                 <b-form-select-option :value="null">Seleccione una opcion</b-form-select-option>
@@ -80,33 +80,71 @@ export default {
             titulo2: "Modificar Persona",
             form: {
                 nombre: {
-                    label: 'nombre',
+                    label: 'Nombres',
                     value: "",
                     type: "text",
                     state: null,
                     stateText: null
                 }, apellido: {
-                    label: 'apellido',
+                    label: 'Apellidos',
                     value: "",
                     type: "text",
                     state: null,
                     stateText: null
                 }, ci: {
-                    label: 'ci',
+                    label: 'CI',
                     value: "",
                     type: "text",
                     state: null,
                     stateText: null
+                }, telefono: {
+                    label: 'Telefono',
+                    value: "",
+                    type: "text",
+                    state: null,
+                    stateText: null
+                }, correo: {
+                    label: 'Correo electronico',
+                    value: "",
+                    type: "email",
+                    state: null,
+                    stateText: null
+                }, estado: {
+                    label: 'Estado',
+                    value: "",
+                    type: "select",
+                    state: null,
+                    stateText: null,
+                    optionstates:{0:'Nueva',1:'Antigua'}
                 }, fechaNacimiento: {
                     label: 'Fecha de Nacimiento',
                     value: "",
                     type: "date",
                     state: null,
                     stateText: null
+                }, bautizada: {
+                    label: 'Bautizada',
+                    value: "",
+                    type: "select",
+                    state: null,
+                    stateText: null,
+                    optionB:{0:'Si',1:'No'}
                 }, escuadron: {
                     label: 'Escuadron',
                     value: "",
                     type: "select",
+                    state: null,
+                    stateText: null
+                }, escuadra: {
+                    label: 'Nombre del lider',
+                    value: "",
+                    type: "text",
+                    state: null,
+                    stateText: null
+                }, comentarios: {
+                    label: 'Comentarios',
+                    value: "",
+                    type: "text",
                     state: null,
                     stateText: null
                 }
@@ -189,6 +227,13 @@ export default {
                     this.sending = false;
                 })
 
+        },
+        obtenercombox(valor){
+            switch (valor){
+                case 'escuadron': return this.escuadron;
+                case 'estado': return  this.form.estado.optionstates;
+                case 'bautizada' :return this.form.bautizada.optionB;
+            }
         }
     },
 }

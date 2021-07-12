@@ -17,6 +17,7 @@
                         show-empty
                         small
                     >
+
                         <template #empty="scope">
                             <p class="text-center">{{ textoVacio }}</p>
                         </template>
@@ -24,6 +25,23 @@
                             {{ getEscuadron(data.value) }}
                         </template>
                     </b-table>
+
+                    <b-table
+                        striped
+                        hover
+                        responsive
+                        :items="cantidad"
+                        :fields="fields2"
+                        show-empty
+                        small
+                    >
+
+                        <template #empty="scope">
+                            <p class="text-center">{{ textoVacio }}</p>
+                        </template>
+
+                    </b-table>
+
                 </div>
             </div>
         </div>
@@ -40,6 +58,7 @@ export default {
     props: {
         personas: Array,
         escuadrones: Array,
+        cantidad : Array,
         errors: Object,
     },
     components: {
@@ -53,6 +72,11 @@ export default {
                     'nombre',
                     'apellido',
                     'escuadron',
+                    'total',
+                ],
+            fields2:
+                [
+                    'escuadronNombre',
                     'total',
                 ],
         }
