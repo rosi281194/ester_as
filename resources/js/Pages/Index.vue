@@ -122,10 +122,24 @@ export default {
             textoVacio: 'No existen Personas',
             fields:
                 [
-                    'nombre',
-                    'apellido',
-                    'escuadron',
-                    'ci',
+
+                    {
+                        key:'nombre',
+                        label:'Nombres',
+                    },
+                    {
+                        key:'apellido',
+                        label:'Apellidos',
+                    },
+                    {
+                        key:'escuadron',
+                        label:'Escuadrón',
+                    },
+
+                    {
+                        key:'ci',
+                        label:'CI',
+                    },
                     'Acciones'
                 ],
             itemRow: {},
