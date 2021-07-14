@@ -8,7 +8,10 @@
             </div>
             <div class="row m-b-20">
                 <div class="col">
+                    <b-card title="Cantidad Total" sub-title="cantidad Total de asistencia">
 
+                    <strong class="text-dark">{{getsum()}}</strong>
+                    </b-card>
 
                     <b-card title="Cantidad" sub-title="cantidad de asistencia por escuadron">
                     <b-table
@@ -24,10 +27,13 @@
                         <template #empty="scope">
                             <p class="text-center">{{ textoVacio }}</p>
                         </template>
-
+                        <template v-slot:cell(total)="data">
+                            {{ data.value }}
+                        </template>
                     </b-table>
+
                     </b-card>
-                    <b-card title="Nuevas ester" sub-title="Detalle de personas nuevas el dia de hoy">
+                    <b-card title="Nuevas Ester" sub-title="Detalle de personas nuevas">
                         <b-table
                             striped
                             hover
@@ -72,6 +78,7 @@ export default {
     data() {
         return {
             textoVacio: 'No existen Personas',
+            sumatotal:0,
             fields:
                 [
                     'nombre',
@@ -106,7 +113,20 @@ export default {
             }
             return data;
         },
+
+        getsum()
+        {
+            let suma=0;
+            for (let key in this.cantidad)
+            {
+                suma =this.cantidad[key].total+ suma;
+            }
+
+            return suma;
+        }
     }
 }
+
+
 </script>
 
