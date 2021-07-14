@@ -49,12 +49,15 @@
 
 
                 <div class="col-12">
+                    <b-card title="Lista ester" >
                     <b-table
                         striped
                         hover
                         responsive
                         :items="personas"
                         :fields="fields"
+                        :current-page="currentPage"
+                        :per-page="perPage"
                         :filter="filter"
                         :filter-included-fields="filterOn"
                         show-empty
@@ -77,6 +80,17 @@
                             </div>
                         </template>
                     </b-table>
+                    </b-card>
+                    <b-col  class="my-1">
+                        <b-pagination
+                            v-model="currentPage"
+                            :total-rows="totalRows"
+                            :per-page="perPage"
+                            align="fill"
+                            size="sm"
+                            class="my-0"
+                        ></b-pagination>
+                    </b-col>
                 </div>
             </div>
         </div>
@@ -111,9 +125,13 @@ export default {
                     'nombre',
                     'apellido',
                     'escuadron',
+                    'ci',
                     'Acciones'
                 ],
             itemRow: {},
+            totalRows: 1,
+            currentPage: 1,
+            perPage: 5,
             errores:{},
             filter: null,
             filterOn: [],
@@ -168,6 +186,11 @@ export default {
                     this.sending = false;
                 })
         }
+    }
+    ,
+    mounted() {
+        // Set the initial number of items
+        this.totalRows = this.personas.length
     }
 }
 </script>

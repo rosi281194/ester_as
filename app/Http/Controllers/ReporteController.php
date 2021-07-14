@@ -7,6 +7,7 @@ use App\Models\Escuadron;
 use App\Models\Persona;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Carbon\Carbon;
 
 class ReporteController extends Controller
 {
@@ -14,10 +15,12 @@ class ReporteController extends Controller
     {
 //        $nowI = Carbon::now()->startOfDay()->toDateTimeString();
 //        $nowF = Carbon::now()->endOfDay()->toDateTimeString();
+        $date = Carbon::now();
         $presentes = DB::table(Asistencia::$tables)
 //            ->whereBetween('created_at', [$nowI, $nowF])
             ->select('persona', DB::raw('count(*) as total'))
             ->groupBy('persona')
+            ->whereDate('created_at', Carbon::now()->toDateString())
             ->get();
         $personas = DB::table(Persona::$tables)
             ->get();
@@ -26,7 +29,15 @@ class ReporteController extends Controller
             ->join('asistencia', 'persona.id', '=', 'asistencia.persona')
             ->join('escuadron', 'escuadron.id', '=', 'persona.escuadron')
             ->select('escuadron.nombre as escuadronNombre', DB::raw('count(escuadron.nombre) as total'))
+            ->whereDate('asistencia.created_at', Carbon::now()->toDateString())
             ->groupBy('escuadron.nombre')
+            ->get();
+
+
+        $nuevos = DB::table('persona')
+            ->where('estado', '=', 0)
+            ->select('*',DB::raw('YEAR(CURDATE())-YEAR(`persona`.`fechaNacimiento`) as Edad') )
+
             ->get();
 
         foreach ($personas as $key => $persona) {
@@ -37,7 +48,7 @@ class ReporteController extends Controller
             }
         }
         $escuadrones = Escuadron::getAll();
-        return Inertia::render('Reporte', ['personas' => $personas, 'escuadrones' => $escuadrones,'cantidad' => $cantidadesc]);
+        return Inertia::render('Reporte', ['personas' => $personas, 'escuadrones' => $escuadrones,'cantidad' => $cantidadesc,'nuevos' => $nuevos]);
     }
 
 }

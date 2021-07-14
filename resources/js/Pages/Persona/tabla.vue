@@ -15,12 +15,38 @@
 
             <div class="row m-b-20">
                 <div class="col">
+                    <div class="row m-b-20">
+                        <b-col  class="my-1">
+                            <b-form-group
+                                label=""
+                                label-for="filter-input"
+                                label-align-sm="right"
+                                label-size="sm"
+                                class="mb-0"
+                            >
+                                <b-input-group size="sm">
+                                    <b-form-input
+                                        id="filter-input"
+                                        v-model="filter"
+                                        type="search"
+                                        placeholder="Buscar Nombre"
+                                    ></b-form-input>
+
+                                    <b-button :disabled="!filter" @click="filter = ''" variant="primary">Limpiar</b-button>
+                                </b-input-group>
+                            </b-form-group>
+                        </b-col>
+                    </div>
                     <b-table
                         striped
                         hover
                         responsive
                         :items="personas"
                         :fields="fields"
+                        :current-page="currentPage"
+                        :per-page="perPage"
+                        :filter="filter"
+                        :filter-included-fields="filterOn"
                         show-empty
                         small
                     >
@@ -44,6 +70,16 @@
                             </div>
                         </template>
                     </b-table>
+                    <b-col  class="my-1">
+                        <b-pagination
+                            v-model="currentPage"
+                            :total-rows="totalRows"
+                            :per-page="perPage"
+                            align="fill"
+                            size="sm"
+                            class="my-0"
+                        ></b-pagination>
+                    </b-col>
                 </div>
             </div>
         </div>
@@ -81,7 +117,12 @@ export default {
                     'fechaNacimiento',
                     'Acciones'
                 ],
-            itemRow: {}
+            itemRow: {},
+            totalRows: 1,
+            currentPage: 1,
+            perPage: 5,
+            filter: null,
+            filterOn: [],
         }
     },
     methods: {
@@ -108,6 +149,10 @@ export default {
             )
             return data;
         },
+    },
+    mounted() {
+        // Set the initial number of items
+        this.totalRows = this.personas.length
     }
 }
 </script>

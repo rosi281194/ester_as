@@ -1,7 +1,7 @@
 <template>
     <b-navbar toggleable="lg" type="dark" variant="rose">
         <b-container>
-            <b-navbar-brand href="#">Ester AS</b-navbar-brand>
+            <b-navbar-brand href="#">Ester</b-navbar-brand>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
@@ -50,7 +50,7 @@ export default {
                 }, {
                     label: 'Escuadron',
                     url: '/escuadron',
-                    role: 'user',
+                    role: 'admin',
                 }, {
                     label: 'Usuarios',
                     url: '/users',

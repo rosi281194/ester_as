@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Escuadron;
 use App\Models\Persona;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +31,7 @@ class PersonaController extends Controller
                 'fechaNacimiento' => 'required',
                 'escuadron' => 'required',
                 'telefono' => 'required|numeric',
-                'ci' => 'required|numeric',
+                    'ci' => 'numeric|nullable|unique:App\Models\Persona',
                 'correo' => 'email|nullable'
 
             ]);

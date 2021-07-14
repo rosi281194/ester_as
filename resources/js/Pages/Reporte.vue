@@ -8,24 +8,9 @@
             </div>
             <div class="row m-b-20">
                 <div class="col">
-                    <b-table
-                        striped
-                        hover
-                        responsive
-                        :items="personas"
-                        :fields="fields"
-                        show-empty
-                        small
-                    >
 
-                        <template #empty="scope">
-                            <p class="text-center">{{ textoVacio }}</p>
-                        </template>
-                        <template v-slot:cell(escuadron)="data">
-                            {{ getEscuadron(data.value) }}
-                        </template>
-                    </b-table>
 
+                    <b-card title="Cantidad" sub-title="cantidad de asistencia por escuadron">
                     <b-table
                         striped
                         hover
@@ -41,7 +26,26 @@
                         </template>
 
                     </b-table>
+                    </b-card>
+                    <b-card title="Nuevas ester" sub-title="Detalle de personas nuevas el dia de hoy">
+                        <b-table
+                            striped
+                            hover
+                            responsive
+                            :items="nuevos"
+                            :fields="fields3"
+                            show-empty
+                            small
+                        >
 
+                            <template #empty="scope">
+                                <p class="text-center">{{ textoVacio }}</p>
+                            </template>
+                            <template v-slot:cell(escuadron)="data">
+                                {{ getEscuadron(data.value) }}
+                            </template>
+                        </b-table>
+                    </b-card>
                 </div>
             </div>
         </div>
@@ -59,6 +63,7 @@ export default {
         personas: Array,
         escuadrones: Array,
         cantidad : Array,
+        nuevos : Array,
         errors: Object,
     },
     components: {
@@ -73,6 +78,15 @@ export default {
                     'apellido',
                     'escuadron',
                     'total',
+                ],
+            fields3:
+                [
+                    'nombre',
+                    'apellido',
+                    'telefono',
+                    'Edad',
+
+
                 ],
             fields2:
                 [
