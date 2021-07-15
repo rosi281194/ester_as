@@ -196,9 +196,10 @@ export default {
             let user = new FormData();
             if (this.idForm) {
                 user.append('id', this.idForm);
+
             }
             Object.keys(this.form).forEach(key => {
-                if (this.form[key].value != null) {
+                if (this.form[key].value != null && this.form[key].value!="") {
                     user.append(key, this.form[key].value);
                 }
             })
