@@ -199,7 +199,7 @@ export default {
 
             }
             Object.keys(this.form).forEach(key => {
-                if (this.form[key].value != null && this.form[key].value!="") {
+                if (this.form[key].value != null && this.form[key].value!=="") {
                     user.append(key, this.form[key].value);
                 }
             })
