@@ -36,8 +36,8 @@ class ReporteController extends Controller
 
         $nuevos = DB::table('persona')
             ->where('estado', '=', 0)
-            ->select('*',DB::raw('YEAR(CURDATE())-YEAR(`persona`.`fechaNacimiento`) as Edad') )
-
+            ->select('*',DB::raw('YEAR(CURDATE())-YEAR(`persona`.`fechaNacimiento`) as Edad') ,'persona.escuadron as Escuadron' )
+            ->orderBy('persona.escuadron')
             ->get();
 
         foreach ($personas as $key => $persona) {

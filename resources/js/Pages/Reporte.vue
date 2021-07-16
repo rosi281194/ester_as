@@ -92,6 +92,7 @@ export default {
                     'apellido',
                     'telefono',
                     'Edad',
+                    'Escuadron',
 
 
                 ],
