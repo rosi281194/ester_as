@@ -34,10 +34,18 @@ export default {
     data() {
         return {
             textoVacio: '',
+            timer:''
 
         }
     },
     methods: {
+    fetchData(){
+        location.reload();
+    }
+    },
+    created() {
+
+        this.timer = setInterval(this.fetchData, 5000);
 
     }
 }
