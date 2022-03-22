@@ -4305,7 +4305,7 @@ tbody.collapse.show {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #fafafa;
+  background-color: #ffc1d3;
   border-color: #dee2e6 #dee2e6 #fafafa;
 }
 
@@ -14471,7 +14471,7 @@ h2.title {
 
 .nav-tabs .nav-item .nav-link {
   position: relative;
-  color: #fff;
+  color: #de0a0a;
   border: 0;
   margin: 0;
   border-radius: 3px;
@@ -14491,7 +14491,7 @@ h2.title {
 .nav-tabs .nav-item .nav-link:hover,
 .nav-tabs .nav-item .nav-link:focus {
   border: 0 !important;
-  color: #fff !important;
+  color: #030000 !important;
   font-weight: 500;
 }
 
@@ -14505,7 +14505,7 @@ h2.title {
 }
 
 .nav-tabs .nav-item .nav-link.active {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #ffc1d3;
   transition: 0.3s background-color 0.2s;
 }
 

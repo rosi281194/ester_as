@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecaudacionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,5 +64,13 @@ Route::group(['middleware' => 'auth'], function () {
     //reporte
     Route::get('reporte', [ReporteController::class, 'index'])
         ->name('reporte');
+    Route::get('totalaporte', [ReporteController::class, 'recaudacionfun'])
+        ->name('reporterec');
+
+            Route::get('recaudacion', [RecaudacionController::class, 'getAll'])
+                ->name('listaRecaudaciom');
+    Route::post('recaudacion', [RecaudacionController::class, 'post'])
+        ->name('guardarRecaudacion');
+
 });
 

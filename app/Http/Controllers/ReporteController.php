@@ -40,6 +40,7 @@ class ReporteController extends Controller
             ->orderBy('persona.escuadron')
             ->get();
 
+
         foreach ($personas as $key => $persona) {
             foreach ($presentes as $presente) {
                 if ($persona->id === $presente->persona) {
@@ -50,5 +51,19 @@ class ReporteController extends Controller
         $escuadrones = Escuadron::getAll();
         return Inertia::render('Reporte', ['personas' => $personas, 'escuadrones' => $escuadrones,'cantidad' => $cantidadesc,'nuevos' => $nuevos]);
     }
+function  recaudacionfun ()
+{
+    $cantidadRecBs = DB::table('recaudacion')
 
+        ->select( DB::raw('sum(montoBs) as totalBs'))
+        ->get()->first();
+    $cantidadRecSus = DB::table('recaudacion')
+
+        ->select( DB::raw('sum(montoSus) as totalSus'))
+        ->get()->first();
+
+    $total =$cantidadRecBs->totalBs+($cantidadRecSus->totalSus*6.9);
+    return Inertia::render('Total', ['total' => $total]);
+
+}
 }

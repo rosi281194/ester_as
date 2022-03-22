@@ -60,7 +60,17 @@ export default {
                     url: '/reporte',
                     role: 'user',
                 },
+                {
+                    label: 'Recaudacion',
+                    url: '/recaudacion',
+                    role: 'user',
+                },{
+                    label: 'Total',
+                    url: '/totalaporte',
+                    role: 'user',
+                },
             ],
+
         };
     },
     methods: {
