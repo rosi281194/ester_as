@@ -40,12 +40,12 @@ export default {
     },
     methods: {
     fetchData(){
-        location.reload();
+        this.$inertia.reload();
     }
     },
     created() {
 
-        this.timer = setInterval(this.fetchData, 5000);
+        this.timer = setInterval(this.fetchData, 10000);
 
     }
 }
