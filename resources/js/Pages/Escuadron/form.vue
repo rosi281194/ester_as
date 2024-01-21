@@ -50,7 +50,8 @@
 
 <script>
 import axios from "axios";
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '../Shared/LoadingButton.vue'
+import { router } from '@inertiajs/vue2'
 
 export default {
     props: {
@@ -130,7 +131,7 @@ export default {
                 .then(({data}) => {
                     if (data["status"] === 0) {
                         this.$bvModal.hide(this.id)
-                        this.$inertia.get(data["path"])
+                        router.get(data["path"])
                     }
                     Object.keys(this.form).forEach(key => {
                         if (key in data.errors) {

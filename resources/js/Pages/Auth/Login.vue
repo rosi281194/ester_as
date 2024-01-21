@@ -59,7 +59,8 @@
 </template>
 
 <script>
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '../Shared/LoadingButton.vue'
+import { router } from '@inertiajs/vue2'
 
 export default {
     components: {
@@ -86,7 +87,7 @@ export default {
                 remember: this.form.remember,
             }
 
-            this.$inertia.post('/login', data, {
+            router.post('/login', data, {
                 onStart: () => this.sending = true,
                 onFinish: () => this.sending = false,
             })

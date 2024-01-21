@@ -50,7 +50,7 @@
 
 <script>
 import axios from "axios";
-import LoadingButton from '@/Shared/LoadingButton'
+import LoadingButton from '../Shared/LoadingButton.vue'
 
 export default {
     props: {

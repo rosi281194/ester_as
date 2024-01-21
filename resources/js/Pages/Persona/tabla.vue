@@ -87,8 +87,8 @@
 </template>
 
 <script>
-import Layout from '@/Shared/Layout'
-import Form from './form'
+import Layout from '../Shared/Layout.vue'
+import Form from './form.vue'
 import moment from 'moment';
 
 export default {

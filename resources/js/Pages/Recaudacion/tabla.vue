@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import Layout from '@/Shared/Layout'
-import FormUser from './form'
+import Layout from '../Shared/Layout.vue'
+import FormUser from './form.vue'
 
 export default {
     layout: Layout,

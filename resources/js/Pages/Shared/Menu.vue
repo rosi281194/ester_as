@@ -9,13 +9,13 @@
                     <template v-for="(link, key) in menue">
                         <template v-if="getPermission(link.role)">
                             <li :class="'nav-item '+((getUrl() === link.url)?'active':'')">
-                                <inertia-link
+                                <Link
                                     :href="link.url"
                                     :key="key"
                                     class="nav-link"
                                 >
                                     <span>{{ link.label }}</span>
-                                </inertia-link>
+                                </Link>
                             </li>
                         </template>
                     </template>
@@ -24,9 +24,9 @@
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
                     <li class="nav-item">
-                        <inertia-link href="/logout" method="post" class="nav-link">
+                        <Link href="/logout" method="post" class="nav-link">
                             <span>Salir</span>
-                        </inertia-link>
+                        </Link>
                     </li>
                 </b-navbar-nav>
             </b-collapse>
@@ -35,7 +35,11 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/vue2'
 export default {
+    components: {
+        Link
+    },
     data() {
         return {
             menue: [

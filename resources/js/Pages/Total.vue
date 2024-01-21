@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import Layout from '@/Shared/Layout'
-import LoadingButton from '@/Shared/LoadingButton'
+import Layout from './Shared/Layout.vue'
+import LoadingButton from './Shared/LoadingButton.vue'
 import axios from "axios";
-
+import { router } from '@inertiajs/vue2'
 export default {
     layout: Layout,
     props: {
@@ -40,7 +40,7 @@ export default {
     },
     methods: {
     fetchData(){
-        this.$inertia.reload();
+        router.reload();
     }
     },
     created() {

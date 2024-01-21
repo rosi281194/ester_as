@@ -45,9 +45,9 @@
 </template>
 
 <script>
-import Layout from '@/Shared/Layout'
-import FormUser from './form'
-
+import Layout from '../Shared/Layout.vue'
+import FormUser from './form.vue'
+import { router } from '@inertiajs/vue2'
 export default {
     layout: Layout,
     props: {
@@ -83,7 +83,7 @@ export default {
             }
         },
         borrar(id) {
-            this.$inertia.delete(`escuadron/${id}`, {
+            router.delete(`escuadron/${id}`, {
                 onBefore: () => confirm('Esta seguro?'),
             })
         }
